@@ -5,6 +5,7 @@ import javax.security.auth.login.LoginContext;
 import java.security.PrivilegedExceptionAction;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
@@ -53,10 +54,8 @@ public class Main {
 
         Class.forName("org.postgresql.Driver");
         Connection conn =
-                (Connection)Subject.doAs(specificSubject, new PrivilegedExceptionAction()
-                {
-                    public Object run()
-                    {
+                (Connection) Subject.doAs(specificSubject, new PrivilegedExceptionAction() {
+                    public Object run() {
                         Connection con = null;
                         Properties prop = new Properties();
                         prop.setProperty("user", "KRBUSR01");
@@ -64,11 +63,9 @@ public class Main {
                         prop.setProperty("jaasApplicationName", "pgjdbc");
                         //prop.setProperty("kerberosServerName", "aaa");
                         String url = URL;
-                        try
-                        {
+                        try {
                             con = DriverManager.getConnection(url, prop);
-                        } catch (Exception except)
-                        {
+                        } catch (Exception except) {
                             except.printStackTrace();
                         }
                         return con;
@@ -76,7 +73,10 @@ public class Main {
                 });
 
         Statement stmt = conn.createStatement();
-        stmt.executeQuery("SELECT 1");
+        ResultSet rs = stmt.executeQuery("SELECT current_user");
+        while (rs.next())
+            System.out.println("User is: " + rs.getString(1));
+
 
         /*
             TESTING, connection without krb, jaas

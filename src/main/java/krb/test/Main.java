@@ -14,9 +14,9 @@ import java.util.Properties;
  */
 public class Main {
     // postgresql 9.2
-    private static final String URL = "jdbc:postgresql://db14.mw.lab.eng.bos.redhat.com:5432/krbusr01";
+//    private static final String URL = "jdbc:postgresql://db14.mw.lab.eng.bos.redhat.com:5432/krbusr01";
     // postgresql plus
-    //private static final String URL = "jdbc:edb://db15.mw.lab.eng.bos.redhat.com:5432/dballo00";
+    private static final String URL = "jdbc:edb://db15.mw.lab.eng.bos.redhat.com:5432/dballo00";
     //local
 //    private static final String URL = "jdbc:postgresql://krbtest:5432/template1";
 
@@ -52,14 +52,15 @@ public class Main {
 //        if(!retLogin)
 //            throw new Exception("Kerberos5 adaptor couldn't retrieve credentials (TGT) from the cache");
 
-        Class.forName("org.postgresql.Driver");
+//        Class.forName("org.postgresql.Driver");
+        Class.forName("com.edb.Driver");
         Connection conn =
                 (Connection) Subject.doAs(specificSubject, new PrivilegedExceptionAction() {
                     public Object run() {
                         Connection con = null;
                         Properties prop = new Properties();
-                        prop.setProperty("user", "KRBUSR01");
-//                        prop.setProperty("user", "host/eap@JBOSS.ORG");
+                        prop.setProperty("user", "KRBUSR01@MW.LAB.ENG.BOS.REDHAT.COM");
+//                        prop.setProperty("user", "user2@JBOSS.ORG");
                         prop.setProperty("jaasApplicationName", "pgjdbc");
                         //prop.setProperty("kerberosServerName", "aaa");
                         String url = URL;

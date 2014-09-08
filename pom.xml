@@ -8,11 +8,32 @@
     <artifactId>jdbc-client</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>lib</id>
+            <name>lib</name>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>file://${project.basedir}/lib</url>
+        </repository>
+    </repositories>
+
+
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>postgresql</groupId>-->
+            <!--<artifactId>postgresql</artifactId>-->
+            <!--<version>9.1-901.jdbc4</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.1-901.jdbc4</version>
+            <groupId>ebd</groupId>
+            <artifactId>jdbc</artifactId>
+            <version>1</version>
         </dependency>
     </dependencies>
 

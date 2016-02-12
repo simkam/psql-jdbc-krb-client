@@ -15,8 +15,11 @@ import java.util.Properties;
 public class Main {
     // postgresql 9.2
 //    private static final String URL = "jdbc:postgresql://db14.mw.lab.eng.bos.redhat.com:5432/krbusr01";
-    // postgresql plus
-    private static final String URL = "jdbc:edb://db15.mw.lab.eng.bos.redhat.com:5432/dballo00";
+    // postgresql 9.3
+//    private static final String URL = "jdbc:postgresql://db20.mw.lab.eng.bos.redhat.com:5432/krbusr01";
+    // postgresql 9.4
+    private static final String URL = "jdbc:postgresql://gen-vm006.mw.lab.eng.bos.redhat.com:5432/krbusr01";
+
     //local
 //    private static final String URL = "jdbc:postgresql://krbtest:5432/template1";
 
@@ -29,7 +32,7 @@ public class Main {
         System.setProperty("java.security.krb5.conf", "/home/msimka/Projekty/redhat/tmp/jdbc-client/krb5.conf");
 
         System.setProperty("java.security.auth.login.config", "/home/msimka/Projekty/redhat/tmp/jdbc-client/login.conf"); // EDIT PATH!!
-//        System.setProperty("java.security.auth.login.config", "/home/msimka/Projekty/redhat/tmp/jdbc-client/login_local.conf"); // EDIT PATH!!
+
 
         Subject specificSubject = new Subject();
         LoginContext lc = new LoginContext("pgjdbc", specificSubject);
@@ -52,14 +55,15 @@ public class Main {
 //        if(!retLogin)
 //            throw new Exception("Kerberos5 adaptor couldn't retrieve credentials (TGT) from the cache");
 
-//        Class.forName("org.postgresql.Driver");
-        Class.forName("com.edb.Driver");
+        Class.forName("org.postgresql.Driver");
+
         Connection conn =
                 (Connection) Subject.doAs(specificSubject, new PrivilegedExceptionAction() {
                     public Object run() {
                         Connection con = null;
                         Properties prop = new Properties();
                         prop.setProperty("user", "KRBUSR01@MW.LAB.ENG.BOS.REDHAT.COM");
+//                        prop.setProperty("user", "KRBUSR01");
 //                        prop.setProperty("user", "user2@JBOSS.ORG");
                         prop.setProperty("jaasApplicationName", "pgjdbc");
                         //prop.setProperty("kerberosServerName", "aaa");

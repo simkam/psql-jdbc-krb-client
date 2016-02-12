@@ -25,16 +25,18 @@
 
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>postgresql</groupId>-->
-            <!--<artifactId>postgresql</artifactId>-->
-            <!--<version>9.1-901.jdbc4</version>-->
-        <!--</dependency>-->
         <dependency>
-            <groupId>ebd</groupId>
-            <artifactId>jdbc</artifactId>
-            <version>1</version>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9</version>
+            <scope>system</scope>
+            <systemPath>/home/msimka/Projekty/redhat/svn/jdbc_storage/EAP/7.0.0/postgresql93/jdbc4/postgresql-9.4.1207.jar</systemPath>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>ebd</groupId>-->
+            <!--<artifactId>jdbc</artifactId>-->
+            <!--<version>1</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
